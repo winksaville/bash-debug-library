@@ -121,12 +121,13 @@ bdl () {
 		bdl_offset=
 	fi
 
+	info="$BASHPID:$BASHPID ${BASH_SOURCE[${bdl_call_depth}+1]}:${FUNCNAME[${bdl_call_depth}+1]}:${bdl_ln}:${@:+ }$@"
 	if (( $# <= 1 )); then
-		bdl_nsl $bdl_dst "${BASH_SOURCE[${bdl_call_depth}+1]##*/}:${bdl_ln}:${@:+ }$@"
+		bdl_nsl $bdl_dst $info
 	else
 		v_=$1
 		shift
-		bdl_nsl $v_ "${BASH_SOURCE[${bdl_call_depth}+1]##*/}:${bdl_ln}:${@:+ }$@"
+		bdl_nsl $v_ $info
 	fi
 	return 0
 }
